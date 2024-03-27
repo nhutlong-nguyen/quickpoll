@@ -1,1 +1,1 @@
-# snappoll
+#QuickPoll web app
