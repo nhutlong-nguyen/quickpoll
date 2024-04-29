@@ -1,0 +1,45 @@
+"""
+defines the structure of the 'User' data that will be returned by queries or mutations
+"""
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  roles: [String!]!
+}
+
+"""
+input types specify the structure of data that can be sent to the server. This makes mutations self-documeting
+and type-safe. Clients will know what data to send and in what format, and they will
+receive clear errors if they send an incorrect data structure
+"""
+input CreateUserInput {
+  username: String!
+  email: String!
+  password: String!
+  roles: [String!]!
+}
+
+input UpdateUserInput {
+  username: String
+  email: String
+  password: String
+  roles: [String!]
+}
+
+"""
+define the operations for retrieving data from your server
+"""
+type Query {
+  users: [User!]!
+  user(id: ID!): User
+}
+
+"""
+unlike queries, mutations change data
+"""
+type Mutation {
+  addUser(input: CreateUserInput!): User
+  modifyUser(id: ID!, input: UpdateUserInput!): User
+  deleteUser(id: ID!): Boolean # It's common to return a boolean for deletion to confirm the operation was successful.
+}
